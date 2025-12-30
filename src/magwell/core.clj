@@ -8,24 +8,61 @@
   (spit path (s/write-scad model))
   path)
 
-(def dims {:x 90 :y 65 :z 38})
+;; --- Dimensions (match the working SCAD) -------------------------------
 
-(defn block []
-  (let [{:keys [x y z]} dims]
+(def outer-dims {:x 90 :y 65 :z 38})
+
+(def mag-inner-dims {:x 65 :y 120 :z 27})
+(def mag-inner-pos  {:x 6  :y -20 :z 5.5})
+
+(def mag-side-channel-dims {:x 4 :y 120 :z 15})
+(def mag-side-channel-pos  {:x 70 :y -20 :z 11.5})
+
+;; --- Geometry ----------------------------------------------------------
+
+(defn outer-block []
+  (let [{:keys [x y z]} outer-dims]
     (m/cube x y z :center false)))
 
-(defn cutter []
+(defn mag-slant-cutter []
   (m/translate [0 0 -1]
-      (m/extrude-linear
-       {:height 200}           ;; extrude through Y
-       (m/polygon
-        [[-1   -1]               ;; bottom-left
-         [75  -1]               ;; bottom-right
-         [75  0]              ;; top-right
-         [-1  20]]))))        ;; top-left
+    (m/extrude-linear {:height 200}
+      (m/polygon
+       [[-1 -1]
+        [75 -1]
+        [75  0]
+        [-1 20]]))))
+
+(defn shell-with-slant-cut []
+  (m/difference
+   (outer-block)
+   (mag-slant-cutter)))
+
+(defn mag-inner-cube []
+  (let [{:keys [x y z]} mag-inner-dims
+        {px :x py :y pz :z} mag-inner-pos]
+    (m/translate [px py pz]
+      (m/cube x y z :center false))))
+
+(defn mag-side-channel-cube []
+  (let [{:keys [x y z]} mag-side-channel-dims
+        {px :x py :y pz :z} mag-side-channel-pos]
+    (m/translate [px py pz]
+      (m/cube x y z :center false))))
+
+(defn mag-inner-cutter []
+  (m/union
+   (mag-inner-cube)
+   (mag-side-channel-cube)))
+
+(defn mag-inner-visual []
+  (m/color [1 0 0 1]
+    (mag-inner-cutter)))
 
 (defn model []
-  (m/difference (block) (cutter)))
+  (m/difference
+   (shell-with-slant-cut)
+   (mag-inner-cutter)))
 
 (defn -main [& _]
   (binding [scad-clj.model/*center* false]
