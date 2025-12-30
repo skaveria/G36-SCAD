@@ -13,28 +13,38 @@
       [xt h]
       [(- xt) h]])))
 
-(defn ear-ridge
-  "Single trapezoid rib (additive).
-
-  Intended OpenSCAD equivalent:
-
-    translate([-4.8, 44, 3]) {
-      rotate([0, -90, 90]) {
-        linear_extrude(height=24.2) {
-          polygon(points=[[-3,0],[3,0],[1.25,4],[-1.25,4]]);
-        }
-      }
-    }
-  "
-  []
-  (let [{:keys [trap length pos rot]} p/ear-ridge
+(defn ear-ridge-at
+  "Single trapezoid rib (additive) at an explicit position map {:x :y :z}."
+  [pos]
+  (let [{:keys [trap length rot]} p/ear-ridge
         {:keys [x y z]} pos]
     (m/translate [x y z]
       (m/rotate rot
         (m/extrude-linear {:height length}
           (trapezoid-profile trap))))))
 
+(defn ear-ridge
+  "The base (single) ridge at p/ear-ridge :pos."
+  []
+  (ear-ridge-at (:pos p/ear-ridge)))
+
+(defn ear-ridges
+  "Array of ridges along +Z, starting from p/ear-ridge :pos, spaced by :spacing."
+  []
+  (let [{:keys [pos count spacing]} p/ear-ridge
+        {:keys [x y z]} pos]
+    (apply m/union
+           (for [i (range (max 1 (long count)))]
+             (ear-ridge-at {:x x
+                            :y y
+                            :z (+ z (* i spacing))})))))
+
 (defn ear-ridge-visual
   []
   (m/color [0.2 1 0.2 1]
     (ear-ridge)))
+
+(defn ear-ridges-visual
+  []
+  (m/color [0.2 1 0.2 1]
+    (ear-ridges)))

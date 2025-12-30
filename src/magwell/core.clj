@@ -22,29 +22,25 @@
      (shell/shell-with-slant-cut)
      (mag-inner/mag-inner-cutter)
      (lever-pocket/lever-pocket)
+     (dovetail/dovetail)
      (mag-rim/mag-rim)
      (mag-rim/mag-rim-mirrored)
      (mag-rim/mag-rim-z))
-    (mag-ear/mag-ear))
-    (ear-shelf/ear-shelf)
-   (mag-ear/mag-ear-hole)   ;; if still used
+    (mag-ear/mag-ear)
+    (ear-ridge/ear-ridges))
+   (ear-shelf/ear-shelf)        ;; <-- shelf subtracts from everything
+   (mag-ear/mag-ear-hole)
    (pinhole/pinhole)
-   (pinhole/pinhole-2)
-   (dovetail/dovetail)          ;; <-- ship it here
-   ))
-
-;; <-- global drill
-
-;; or mag-ear, whichever you're using
+   (pinhole/pinhole-2)))
 
 (defn debug-model []
   (m/union
    (model)
-   (ear-ridge/ear-ridge-visual)))
+   (ear-ridge/ear-ridges-visual)))
 
 
 (defn -main
   [& _]
   (binding [scad-clj.model/*center* false]
     ;; swap to (debug-model) whenever you want overlays
-    (mio/write-scad! "out/magwell.scad" (debug-model))))
+    (mio/write-scad! "out/magwell.scad" (model))))

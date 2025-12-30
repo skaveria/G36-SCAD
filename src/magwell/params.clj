@@ -77,5 +77,6 @@
    :pos {:x -4.8 :y 44 :z 3}
    :rot [0
          (- (/ Math/PI 2.0))
-         (/ Math/PI 2.0)]})
-
+         (/ Math/PI 2.0)]
+   :count 5
+   :spacing 8.0})
