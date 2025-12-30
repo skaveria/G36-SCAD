@@ -40,3 +40,15 @@
   []
   (m/color [0 0 1 1]
     (mag-rim-mirrored)))
+
+(defn mag-rim-z
+  "Secondary rim section that is long in Z (uses p/mag-rim-z-pos)."
+  []
+  (let [{:keys [x y z]} p/mag-rim-z-dims
+        {px :x py :y pz :z} p/mag-rim-z-pos]
+    (m/translate [px py pz]
+      (m/cube x y z :center false))))
+
+(defn mag-rim-z-visual []
+  (m/color [0 0 1 1]
+    (mag-rim-z)))

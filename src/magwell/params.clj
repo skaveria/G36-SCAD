@@ -10,3 +10,13 @@
 
 (def mag-rim-dims {:x 120 :y 20 :z 20})
 (def mag-rim-pos {:x -15 :y 59.5 :z 35})
+
+(def mag-rim-z-dims
+  {:x 20    ;; thickness in X
+   :y 20    ;; thickness in Y
+   :z 120}) ;; long in Z
+
+(def mag-rim-z-pos
+  {:x 85    ;; tweak by eye
+   :y 59.5    ;; positive Y
+   :z -15}) ;; start before so it spans Z fully
