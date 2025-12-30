@@ -36,3 +36,10 @@
    :h2 25
    :d  10
    :pos {:x 80 :y -1 :z 19}})
+
+(def pinhole
+  {:diameter 3
+   ;; tweak these freely
+   :pos {:x 75.5
+         :y 15
+         :z 0}})

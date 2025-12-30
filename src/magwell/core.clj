@@ -7,6 +7,7 @@
    [magwell.lever-pocket :as lever-pocket]
    [magwell.mag-rim :as mag-rim]
    [magwell.mag-ear :as mag-ear]
+   [magwell.pinhole :as pinhole]
    [magwell.lever-pocket :as lever-pocket]))
 
 
@@ -22,16 +23,16 @@
      (mag-rim/mag-rim-mirrored)
      (mag-rim/mag-rim-z))
     (mag-ear/mag-ear))
-   (mag-ear/mag-ear-hole)))
+   (mag-ear/mag-ear-hole)   ;; if still using
+   (pinhole/pinhole)))      ;; <-- global drill
 
 ;; or mag-ear, whichever you're using
 
-(defn debug-model
-  []
+(defn debug-model []
   (m/union
    (model)
-   (lever-pocket/lever-pocket-visual)
-   ))
+   (pinhole/pinhole-visual)))
+
 
 (defn -main
   [& _]
