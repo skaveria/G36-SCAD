@@ -9,6 +9,7 @@
    [magwell.mag-ear :as mag-ear]
    [magwell.pinhole :as pinhole]
    [magwell.ear-shelf :as ear-shelf]
+   [magwell.dovetail :as dovetail]
    [magwell.lever-pocket :as lever-pocket]))
 
 
@@ -27,7 +28,9 @@
     (ear-shelf/ear-shelf)
    (mag-ear/mag-ear-hole)   ;; if still used
    (pinhole/pinhole)
-   (pinhole/pinhole-2)))
+   (pinhole/pinhole-2)
+   (dovetail/dovetail)          ;; <-- ship it here
+   ))
 
 ;; <-- global drill
 
@@ -37,7 +40,8 @@
   (m/union
    (model)
    (pinhole/pinhole-visual)
-   (pinhole/pinhole-2-visual)))
+   (pinhole/pinhole-2-visual)
+   (dovetail/dovetail-visual)))
 
 
 (defn -main

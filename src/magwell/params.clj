@@ -47,7 +47,7 @@
 (def pinhole-2
   {:diameter 3
    ;; tweak freely
-   :pos {:x 87
+   :pos {:x 86.5
          :y 30
          :z 0}})
 
@@ -59,3 +59,12 @@
    :pos {:x -58
          :y 50
          :z 11.5}})
+
+
+(def dovetail
+  {:w1 32
+   :w2 25
+   :h1 3
+   :h2 10
+   :d  200
+   :pos {:x 95 :y -20 :z 19}})
