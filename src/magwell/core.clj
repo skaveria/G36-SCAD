@@ -11,6 +11,8 @@
    [magwell.ear-shelf :as ear-shelf]
    [magwell.dovetail :as dovetail]
    [magwell.ear-ridge :as ear-ridge]
+   [magwell.x-bore :as x-bore]
+   [magwell.params :as p]
    [magwell.lever-pocket :as lever-pocket]))
 
 
@@ -27,11 +29,14 @@
      (mag-rim/mag-rim-mirrored)
      (mag-rim/mag-rim-z))
     (mag-ear/mag-ear)
-    (ear-ridge/ear-ridges))
+    (ear-ridge/ear-ridges)
+    )
    (ear-shelf/ear-shelf)        ;; <-- shelf subtracts from everything
    (mag-ear/mag-ear-hole)
+   (x-bore/x-bore)
    (pinhole/pinhole)
-   (pinhole/pinhole-2)))
+   (pinhole/pinhole-2)
+   ))
 
 (defn debug-model []
   (m/union
@@ -42,5 +47,8 @@
 (defn -main
   [& _]
   (binding [scad-clj.model/*center* false]
-    ;; swap to (debug-model) whenever you want overlays
-    (mio/write-scad! "out/magwell.scad" (model))))
+    (mio/write-scad-with-import-cutters!
+     "out/magwell.scad"
+     (model)
+     [{:pos (:pos p/sidecutter)   :rot (:rot p/sidecutter)   :stl "sidecutter.stl"}
+      {:pos (:pos p/sidecutter-2) :rot (:rot p/sidecutter-2) :stl "sidecutter.stl"}])))

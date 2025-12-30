@@ -80,3 +80,17 @@
          (/ Math/PI 2.0)]
    :count 5
    :spacing 8.0})
+
+(def x-bore
+  {:diameter 20
+   :length 250          ;; overkill so it cuts through everything
+   :pos {:x -70 :y 72 :z 19}})
+
+(def sidecutter
+  {:pos {:x 0 :y 0 :z -3}
+   ;; OpenSCAD rotate is DEGREES
+   :rot {:x 0 :y 0 :z 0}})
+
+(def sidecutter-2
+  {:pos {:x 0 :y 0 :z -30}
+   :rot {:x 0 :y 0 :z 0}})
