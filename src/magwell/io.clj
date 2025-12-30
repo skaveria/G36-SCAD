@@ -5,5 +5,8 @@
 (defn write-scad!
   [path model]
   (io/make-parents path)
-  (spit path (s/write-scad model))
+  (spit path
+        (str
+         "$fn = 32;\n\n"   ;; <-- increase cylinder smoothness here
+         (s/write-scad model)))
   path)

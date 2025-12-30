@@ -68,3 +68,14 @@
    :h2 10
    :d  200
    :pos {:x 95 :y -20 :z 19}})
+
+(def ear-ridge
+  {:trap {:w-bottom 6.0
+          :w-top    2.5
+          :h        4.0}
+   :length 24.2
+   :pos {:x -4.8 :y 44 :z 3}
+   :rot [0
+         (- (/ Math/PI 2.0))
+         (/ Math/PI 2.0)]})
+

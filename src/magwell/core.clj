@@ -10,6 +10,7 @@
    [magwell.pinhole :as pinhole]
    [magwell.ear-shelf :as ear-shelf]
    [magwell.dovetail :as dovetail]
+   [magwell.ear-ridge :as ear-ridge]
    [magwell.lever-pocket :as lever-pocket]))
 
 
@@ -39,13 +40,11 @@
 (defn debug-model []
   (m/union
    (model)
-   (pinhole/pinhole-visual)
-   (pinhole/pinhole-2-visual)
-   (dovetail/dovetail-visual)))
+   (ear-ridge/ear-ridge-visual)))
 
 
 (defn -main
   [& _]
   (binding [scad-clj.model/*center* false]
     ;; swap to (debug-model) whenever you want overlays
-    (mio/write-scad! "out/magwell.scad" (model))))
+    (mio/write-scad! "out/magwell.scad" (debug-model))))
