@@ -7,17 +7,17 @@
             [magwell.mag-ear :as mag-ear]))
 
 (defn model
-  "Final magwell solid.
-  Rim + inner cavity are cut from the shell first; the ear is added afterward."
   []
-  (m/union
-   (m/difference
-    (shell/shell-with-slant-cut)
-    (mag-inner/mag-inner-cutter)
-    (mag-rim/mag-rim)
-    (mag-rim/mag-rim-mirrored)
-    (mag-rim/mag-rim-z))
-   (mag-ear/mag-ear)))
+  (m/difference
+   (m/union
+    (m/difference
+     (shell/shell-with-slant-cut)
+     (mag-inner/mag-inner-cutter)
+     (mag-rim/mag-rim)
+     (mag-rim/mag-rim-mirrored)
+     (mag-rim/mag-rim-z))
+    (mag-ear/mag-ear))
+   (mag-ear/mag-ear-hole)))
 
 (defn debug-model
   []
