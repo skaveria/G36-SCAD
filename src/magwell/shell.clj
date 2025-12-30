@@ -5,17 +5,18 @@
 (defn outer-block
   []
   (let [{:keys [x y z]} p/outer-dims]
-    (m/cube x y z :center false)))
+    (m/translate [-5 0 0]   ;; shift left face left by 2
+      (m/cube x y z :center false))))
 
 (defn mag-slant-cutter
   []
   (m/translate [0 0 -1]
     (m/extrude-linear {:height 200}
       (m/polygon
-       [[-1 -1]
+       [[-6 -1]
         [75 -1]
         [75  0]
-        [-1 20]]))))
+        [-6 20]]))))
 
 (defn shell-with-slant-cut
   []

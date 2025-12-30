@@ -1,6 +1,6 @@
 (ns magwell.params)
 
-(def outer-dims {:x 90 :y 65 :z 38})
+(def outer-dims {:x 95 :y 65 :z 38})
 
 (def mag-inner-dims {:x 65 :y 120 :z 27})
 (def mag-inner-pos  {:x 6  :y -20 :z 5.5})
@@ -20,3 +20,11 @@
   {:x 85    ;; tweak by eye
    :y 59.5    ;; positive Y
    :z -15}) ;; start before so it spans Z fully
+
+(def mag-ear
+  {:diameter 22
+   :height   38
+   ;; placement — tweak by eye
+   :pos {:x -5   ;; placeholder, adjust once visualized
+         :y 54
+         :z 0}})
