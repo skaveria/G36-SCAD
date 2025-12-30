@@ -23,15 +23,19 @@
      (mag-rim/mag-rim-mirrored)
      (mag-rim/mag-rim-z))
     (mag-ear/mag-ear))
-   (mag-ear/mag-ear-hole)   ;; if still using
-   (pinhole/pinhole)))      ;; <-- global drill
+   (mag-ear/mag-ear-hole)   ;; if still used
+   (pinhole/pinhole)
+   (pinhole/pinhole-2)))
+
+;; <-- global drill
 
 ;; or mag-ear, whichever you're using
 
 (defn debug-model []
   (m/union
    (model)
-   (pinhole/pinhole-visual)))
+   (pinhole/pinhole-visual)
+   (pinhole/pinhole-2-visual)))
 
 
 (defn -main
