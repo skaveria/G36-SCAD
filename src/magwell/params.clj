@@ -92,5 +92,5 @@
    :rot {:x 0 :y 0 :z 0}})
 
 (def sidecutter-2
-  {:pos {:x 0 :y 0 :z -30}
+  {:pos {:x 0 :y 0 :z -52}
    :rot {:x 0 :y 0 :z 0}})

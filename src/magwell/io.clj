@@ -49,22 +49,18 @@
     path))
 
 (defn write-scad-with-import-cutters!
-  "Write MODEL, wrapped in a top-level difference() that subtracts multiple imported STL cutters.
-
-  Each cutter is a map: {:pos {:x :y :z} :rot {:x :y :z} :stl \"filename.stl\"}
-
-  STL paths are resolved relative to the output .scad file (your case: out/)."
   [path model cutters]
   (io/make-parents path)
   (let [base-scad (s/write-scad model)
         cuts-scad (apply str
                          (for [{:keys [pos rot stl]} cutters]
                            (format
-                            (str "translate([%s,%s,%s]) rotate([%s,%s,%s]) import(\"%s\");\n")
+                            "translate([%s,%s,%s]) rotate([%s,%s,%s]) import(\"%s\");\n"
                             (:x pos) (:y pos) (:z pos)
                             (:x rot) (:y rot) (:z rot)
                             stl)))
         final     (str
+                   "$fn = 48;\n\n"
                    "difference() {\n"
                    base-scad "\n"
                    cuts-scad
