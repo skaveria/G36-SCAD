@@ -28,3 +28,11 @@
    :pos {:x -5   ;; placeholder, adjust once visualized
          :y 54
          :z 0}})
+
+(def lever-pocket
+  {:w1 20
+   :w2 27
+   :h1 15
+   :h2 25
+   :d  10
+   :pos {:x 80 :y -1 :z 19}})

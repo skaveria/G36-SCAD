@@ -1,10 +1,14 @@
 (ns magwell.core
-  (:require [scad-clj.model :as m]
-            [magwell.io :as mio]
-            [magwell.shell :as shell]
-            [magwell.mag-inner :as mag-inner]
-            [magwell.mag-rim :as mag-rim]
-            [magwell.mag-ear :as mag-ear]))
+  (:require
+   [scad-clj.model :as m]
+   [magwell.io :as mio]
+   [magwell.shell :as shell]
+   [magwell.mag-inner :as mag-inner]
+   [magwell.lever-pocket :as lever-pocket]
+   [magwell.mag-rim :as mag-rim]
+   [magwell.mag-ear :as mag-ear]
+   [magwell.lever-pocket :as lever-pocket]))
+
 
 (defn model
   []
@@ -13,20 +17,21 @@
     (m/difference
      (shell/shell-with-slant-cut)
      (mag-inner/mag-inner-cutter)
+     (lever-pocket/lever-pocket)
      (mag-rim/mag-rim)
      (mag-rim/mag-rim-mirrored)
      (mag-rim/mag-rim-z))
     (mag-ear/mag-ear))
    (mag-ear/mag-ear-hole)))
 
+;; or mag-ear, whichever you're using
+
 (defn debug-model
   []
   (m/union
    (model)
-   (mag-ear/mag-ear-visual)
-   (mag-rim/mag-rim-visual)
-   (mag-rim/mag-rim-mirrored-visual)
-   (mag-rim/mag-rim-z-visual)))
+   (lever-pocket/lever-pocket-visual)
+   ))
 
 (defn -main
   [& _]
