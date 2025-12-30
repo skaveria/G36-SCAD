@@ -8,6 +8,7 @@
    [magwell.mag-rim :as mag-rim]
    [magwell.mag-ear :as mag-ear]
    [magwell.pinhole :as pinhole]
+   [magwell.ear-shelf :as ear-shelf]
    [magwell.lever-pocket :as lever-pocket]))
 
 
@@ -23,6 +24,7 @@
      (mag-rim/mag-rim-mirrored)
      (mag-rim/mag-rim-z))
     (mag-ear/mag-ear))
+    (ear-shelf/ear-shelf)
    (mag-ear/mag-ear-hole)   ;; if still used
    (pinhole/pinhole)
    (pinhole/pinhole-2)))

@@ -50,3 +50,12 @@
    :pos {:x 87
          :y 30
          :z 0}})
+
+(def ear-shelf
+  {:dims {:x 60   ;; long in X
+          :y 15
+          :z 15}
+   ;; manual world-space placement (tweak these)
+   :pos {:x -58
+         :y 50
+         :z 11.5}})
