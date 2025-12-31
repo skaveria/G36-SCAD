@@ -1,6 +1,20 @@
 (ns magwell.params)
 
+;; ---------------------------------------------------------------------
+;; constants
+;; ---------------------------------------------------------------------
+
+(def ^:private half-pi (/ Math/PI 2.0))
+
+;; ---------------------------------------------------------------------
+;; global envelope
+;; ---------------------------------------------------------------------
+
 (def outer-dims {:x 95 :y 65 :z 38})
+
+;; ---------------------------------------------------------------------
+;; mag cavity
+;; ---------------------------------------------------------------------
 
 (def mag-inner-dims {:x 65 :y 120 :z 27})
 (def mag-inner-pos  {:x 6  :y -20 :z 5.5})
@@ -8,87 +22,92 @@
 (def mag-side-channel-dims {:x 5 :y 120 :z 15})
 (def mag-side-channel-pos  {:x 70 :y -20 :z 11.5})
 
+;; ---------------------------------------------------------------------
+;; rim cuts
+;; ---------------------------------------------------------------------
+
 (def mag-rim-dims {:x 120 :y 20 :z 20})
-(def mag-rim-pos {:x -15 :y 59.5 :z 35})
+(def mag-rim-pos  {:x -15 :y 59.5 :z 35})
 
-(def mag-rim-z-dims
-  {:x 20    ;; thickness in X
-   :y 20    ;; thickness in Y
-   :z 120}) ;; long in Z
+(def mag-rim-z-dims {:x 20 :y 20 :z 120})
+(def mag-rim-z-pos  {:x 85 :y 59.5 :z -15})
 
-(def mag-rim-z-pos
-  {:x 85    ;; tweak by eye
-   :y 59.5    ;; positive Y
-   :z -15}) ;; start before so it spans Z fully
+;; ---------------------------------------------------------------------
+;; ear + details
+;; ---------------------------------------------------------------------
 
 (def mag-ear
   {:diameter 22
    :height   38
-   ;; placement — tweak by eye
-   :pos {:x -5   ;; placeholder, adjust once visualized
-         :y 54
-         :z 0}})
+   :pos      {:x -5
+              :y 54
+              :z 0}})
+
+(def ear-shelf
+  {:dims {:x 60
+          :y 15
+          :z 15}
+   :pos  {:x -58
+          :y 50
+          :z 11.5}})
+
+(def ear-ridge
+  {:trap    {:w-bottom 6.0
+             :w-top    2.5
+             :h        4.0}
+   :length  24.2
+   :pos     {:x -4.8 :y 44 :z 3}
+   :rot     [0 (- half-pi) half-pi]
+   :count   5
+   :spacing 8.0})
+
+;; ---------------------------------------------------------------------
+;; pockets / interfaces
+;; ---------------------------------------------------------------------
 
 (def lever-pocket
-  {:w1 20
-   :w2 27
-   :h1 15
-   :h2 25
-   :d  10
+  {:w1  20
+   :w2  27
+   :h1  15
+   :h2  25
+   :d   10
    :pos {:x 80 :y -1 :z 19}})
+
+(def dovetail
+  {:w1  32
+   :w2  25
+   :h1  3
+   :h2  10
+   :d   200
+   :pos {:x 95 :y -20 :z 19}})
+
+;; ---------------------------------------------------------------------
+;; global holes
+;; ---------------------------------------------------------------------
 
 (def pinhole
   {:diameter 3
-   ;; tweak these freely
-   :pos {:x 75.5
-         :y 15
-         :z 0}})
+   :pos      {:x 75.5
+              :y 15
+              :z 0}})
 
 (def pinhole-2
   {:diameter 3
-   ;; tweak freely
-   :pos {:x 86.5
-         :y 30
-         :z 0}})
-
-(def ear-shelf
-  {:dims {:x 60   ;; long in X
-          :y 15
-          :z 15}
-   ;; manual world-space placement (tweak these)
-   :pos {:x -58
-         :y 50
-         :z 11.5}})
-
-
-(def dovetail
-  {:w1 32
-   :w2 25
-   :h1 3
-   :h2 10
-   :d  200
-   :pos {:x 95 :y -20 :z 19}})
-
-(def ear-ridge
-  {:trap {:w-bottom 6.0
-          :w-top    2.5
-          :h        4.0}
-   :length 24.2
-   :pos {:x -4.8 :y 44 :z 3}
-   :rot [0
-         (- (/ Math/PI 2.0))
-         (/ Math/PI 2.0)]
-   :count 5
-   :spacing 8.0})
+   :pos      {:x 86.5
+              :y 30
+              :z 0}})
 
 (def x-bore
   {:diameter 20
-   :length 250          ;; overkill so it cuts through everything
-   :pos {:x -70 :y 72 :z 19}})
+   :length   250
+   :pos      {:x -70 :y 72 :z 19}})
+
+;; ---------------------------------------------------------------------
+;; imported cutters (OpenSCAD degrees)
+;; ---------------------------------------------------------------------
 
 (def sidecutter
   {:pos {:x 0 :y 0 :z -3}
-   ;; OpenSCAD rotate is DEGREES
    :rot {:x 0 :y 0 :z 0}})
 
 (def sidecutter-2
