@@ -26,7 +26,7 @@ scad-clj is the only external library we're using.
 * Model
 This creates the model to be saved as a magwell.scad file in -main. The following operations happen in order
 
-** Base solid
+** 1.Base solid
 *** Starts with main shell
 [[file:shell.org][shell-with-slant-cut]] -  creates the bounding box and initial geometry of the magwell.
 
@@ -36,13 +36,13 @@ This creates the model to be saved as a magwell.scad file in -main. The followin
 dovetail – subtracts the mating interface geometry.
 mag-rim / mag-rim-mirrored / mag-rim-z – forms rim reliefs and alignment features.
 
-** External additions
+** 2.External additions
 Unions on the magazine ear geometry and reinforcing ridges.
 
-** Final subtractions
+** 3.Final subtractions
 Cuts away shelves, bores, and pinholes required for assembly, alignment, and actuation.
 
-** Code
+** 4.Code
 #+begin_src clojure :tangle core.clj
 (defn model
   []
