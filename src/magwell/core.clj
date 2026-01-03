@@ -19,6 +19,7 @@
   (m/difference
    (m/union
     (m/difference
+     ;; First differences
      (shell/shell-with-slant-cut)
      (mag-inner/mag-inner-cutter)
      (lever-pocket/lever-pocket)
@@ -27,9 +28,11 @@
      (mag-rim/mag-rim-mirrored)
      (mag-rim/mag-rim-z))
 
+    ;; unions
     (mag-ear/mag-ear)
     (ear-ridge/ear-ridges))
 
+   ;; Last differences.
    (ear-shelf/ear-shelf)
    (mag-ear/mag-ear-hole)
    (x-bore/x-bore)
