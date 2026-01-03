@@ -1,4 +1,5 @@
 #+title: Core
+This is the primary endpoint to generate the g36 compatible magwell for the bren 805.
 
 * Namespace
 - Load all the namespaces we'll need for the project.
@@ -22,20 +23,20 @@
 #+end_src
 
 * Model
-- This function follows a clear add → then subtract pattern:
+This creates the model to be saved as a magwell.scad file in -main.
 
 ** 1.Base solid
-•Starts from the main shell (shell-with-slant-cut).
-•Subtracts all internal cavities and interface cutouts that must exist inside the shell.
+*** Starts with main shell
+- [[file:shell.org][shell-with-slant-cut]] -  creates the bounding box and initial geometry of the magwell.
 
-*** Primary shell shaping
-- [[file:mag-inner.org][mag-inner-cutter]] – clears the internal volume for magazine insertion.
+*** Subtracts all internal cavities and interface cutouts that must exist inside the shell.
+- [[file:mag-inner.org][mag-inner-cutter]] – clears the internal volume for magazine
 - lever-pocket – creates space for the release/retention mechanism.
 - dovetail – subtracts the mating interface geometry.
 - mag-rim / mag-rim-mirrored / mag-rim-z – forms rim reliefs and alignment features.
 
 ** 2.External additions
-•Unions on the magazine ear geometry and reinforcing ridges.
+Unions on the magazine ear geometry and reinforcing ridges.
 
 ** 3.Final subtractions
 •Cuts away shelves, bores, and pinholes required for assembly, alignment, and actuation.

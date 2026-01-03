@@ -1,0 +1,38 @@
+#+title: Shell
+
+* NS
+#+begin_src clojure :tangle shell.clj
+(ns magwell.shell
+  (:require [scad-clj.model :as m]
+            [magwell.params :as p]))
+#+end_src
+
+* Outer-block
+
+* mag-slant-cutter
+
+* shell-with-slant-cut
+#+begin_src clojure :tangle shell.clj
+
+(defn outer-block
+  []
+  (let [{:keys [x y z]} p/outer-dims]
+    (m/translate [-5 0 0]   ;; shift left face left by 2
+      (m/cube x y z :center false))))
+
+(defn mag-slant-cutter
+  []
+  (m/translate [0 0 -1]
+    (m/extrude-linear {:height 200}
+      (m/polygon
+       [[-6 -1]
+        [75 -1]
+        [75  0]
+        [-6 20]]))))
+
+(defn shell-with-slant-cut
+  []
+  (m/difference
+   (outer-block)
+   (mag-slant-cutter)))
+#+end_src
