@@ -39,7 +39,7 @@ This creates the model to be saved as a magwell.scad file in -main.
 Unions on the magazine ear geometry and reinforcing ridges.
 
 ** 3.Final subtractions
-•Cuts away shelves, bores, and pinholes required for assembly, alignment, and actuation.
+Cuts away shelves, bores, and pinholes required for assembly, alignment, and actuation.
 
 #+begin_src clojure :tangle core.clj
 (defn model
@@ -66,7 +66,8 @@ Unions on the magazine ear geometry and reinforcing ridges.
 #+end_src
 
 * Debug-model
-
+This creates the debug model, which can be useful if you're trying to branch two different states.
+It's meant to be rebuilt depending on the scenario. right now it's just doing a union of the ear ridges on the main model.
 #+begin_src clojure :tangle core.clj
 (defn debug-model []
   (m/union
@@ -75,7 +76,8 @@ Unions on the magazine ear geometry and reinforcing ridges.
 #+end_src
 
 * -main
-
+This is used to spit out the "magwell.scad" file. It also loads up external stl files.
+Currently the sidecutters are the only ones that are active.
 #+begin_src clojure :tangle core.clj
 (defn -main
   [& _]
