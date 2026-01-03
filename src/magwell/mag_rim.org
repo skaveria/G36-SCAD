@@ -1,3 +1,6 @@
+#+title: Mag Rim
+
+#+begin_src clojure :tangle mag_rim.clj
 (ns magwell.mag-rim
   (:require [scad-clj.model :as m]
             [magwell.params :as p]))
@@ -65,3 +68,4 @@
   []
   (m/color [0 0 1 1]
     (mag-rim-final)))
+#+end_src

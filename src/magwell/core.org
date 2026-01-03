@@ -36,9 +36,9 @@ This creates the model to be saved as a magwell.scad file in -main. The followin
 
 [[file:lever_pocket.org][lever-pocket]] – creates space for the release/retention mechanism.
 
-dovetail – subtracts the mating interface geometry.
+[[file:dovetail.org][dovetail]] – subtracts the mating interface geometry.
 
-mag-rim / mag-rim-mirrored / mag-rim-z – forms rim reliefs and alignment features.
+[[file:mag_rim.org][mag-rim-final]] – forms rim reliefs and alignment features.
 
 ** 2.External additions
 Unions on the magazine ear geometry and reinforcing ridges.
@@ -58,9 +58,7 @@ Cuts away shelves, bores, and pinholes required for assembly, alignment, and act
      (mag-inner/mag-inner-cutter)
      (lever-pocket/lever-pocket)
      (dovetail/dovetail)
-     (mag-rim/mag-rim)
-     (mag-rim/mag-rim-mirrored)
-     (mag-rim/mag-rim-z))
+     (mag-rim/mag-rim-final))
 
     ;; unions
     (mag-ear/mag-ear)
