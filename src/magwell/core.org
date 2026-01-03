@@ -26,11 +26,12 @@ scad-clj is the only external library we're using.
 * Model
 This creates the model to be saved as a magwell.scad file in -main. The following operations happen in order
 
-** 1.Base solid
-*** Starts with main shell
-[[file:shell.org][shell-with-slant-cut]] -  creates the bounding box and initial geometry of the magwell.
+** 1.Base subtraction
 
 *** Subtracts all internal cavities and interface cutouts that must exist inside the shell.
+
+[[file:shell.org][shell-with-slant-cut]] -  creates the bounding box and initial geometry of the magwell.
+
 [[file:mag-inner.org][mag-inner-cutter]] – clears the internal volume for magazine
 
 [[file:lever_pocket.org][lever-pocket]] – creates space for the release/retention mechanism.
