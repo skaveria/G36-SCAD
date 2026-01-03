@@ -1,19 +1,3 @@
-(ns magwell.core
-  (:require
-   [scad-clj.model :as m]
-   [magwell.io :as mio]
-   [magwell.shell :as shell]
-   [magwell.mag-inner :as mag-inner]
-   [magwell.mag-rim :as mag-rim]
-   [magwell.mag-ear :as mag-ear]
-   [magwell.pinhole :as pinhole]
-   [magwell.ear-shelf :as ear-shelf]
-   [magwell.dovetail :as dovetail]
-   [magwell.ear-ridge :as ear-ridge]
-   [magwell.x-bore :as x-bore]
-   [magwell.params :as p]
-   [magwell.lever-pocket :as lever-pocket]))
-
 (defn model
   []
   (m/difference

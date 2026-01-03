@@ -1,3 +1,9 @@
+#+title: Core
+
+* Namespace
+- Load all the namespaces we'll need for the project.
+
+#+begin_src clojure :tangle core.clj
 (ns magwell.core
   (:require
    [scad-clj.model :as m]
@@ -13,7 +19,28 @@
    [magwell.x-bore :as x-bore]
    [magwell.params :as p]
    [magwell.lever-pocket :as lever-pocket]))
+#+end_src
 
+* Model
+- This function follows a clear add → then subtract pattern:
+
+** 1.Base solid
+•Starts from the main shell (shell-with-slant-cut).
+•Subtracts all internal cavities and interface cutouts that must exist inside the shell.
+
+*** Primary shell shaping
+- [[file:mag-inner.org][mag-inner-cutter]] – clears the internal volume for magazine insertion.
+- lever-pocket – creates space for the release/retention mechanism.
+- dovetail – subtracts the mating interface geometry.
+- mag-rim / mag-rim-mirrored / mag-rim-z – forms rim reliefs and alignment features.
+
+** 2.External additions
+•Unions on the magazine ear geometry and reinforcing ridges.
+
+** 3.Final subtractions
+•Cuts away shelves, bores, and pinholes required for assembly, alignment, and actuation.
+
+#+begin_src clojure :tangle core.clj
 (defn model
   []
   (m/difference
@@ -35,12 +62,20 @@
    (x-bore/x-bore)
    (pinhole/pinhole)
    (pinhole/pinhole-2)))
+#+end_src
 
+* Debug-model
+
+#+begin_src clojure :tangle core.clj
 (defn debug-model []
   (m/union
    (model)
    (ear-ridge/ear-ridges-visual)))
+#+end_src
 
+* -main
+
+#+begin_src clojure :tangle core.clj
 (defn -main
   [& _]
   (binding [scad-clj.model/*center* false]
@@ -49,3 +84,4 @@
      (model)
      [{:pos (:pos p/sidecutter)   :rot (:rot p/sidecutter)   :stl "sidecutter.stl"}
       {:pos (:pos p/sidecutter-2) :rot (:rot p/sidecutter-2) :stl "sidecutter.stl"}])))
+#+end_src
