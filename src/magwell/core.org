@@ -26,7 +26,7 @@ scad-clj is the only external library we're using.
 * Model
 This creates the model to be saved as a `magwell.scad` file in -main. The following operations happen in order
 
-** 1.Base subtraction
+** 1. Base subtraction
 
 *** Subtracts all internal cavities and interface cutouts that must exist inside the shell.
 
@@ -40,7 +40,7 @@ This creates the model to be saved as a `magwell.scad` file in -main. The follow
 
 [[file:mag_rim.org][mag-rim-final]] – forms rim reliefs and alignment features.
 
-** 2.External additions
+** 2. External additions
 
 *** Add all extranal parts to the model
 
@@ -48,7 +48,7 @@ This creates the model to be saved as a `magwell.scad` file in -main. The follow
 
 [[file:ear_ridges.org][ear-ridges]] - These are just some ridgs at the front of the magwell so it doesn't look so weird
 
-** 3.Final subtractions
+** 3. Final subtractions
 
 *** Final subtractions on compound objects
 
@@ -62,7 +62,7 @@ This creates the model to be saved as a `magwell.scad` file in -main. The follow
 
 [[file:pinhole.org][pinhole-2]] - This is an additional pinhole to act as a pivot for the mag release lever.
 
-** 4.Code
+** 4. Code
 #+begin_src clojure :tangle core.clj
 (defn model
   []
