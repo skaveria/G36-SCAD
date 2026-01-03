@@ -2,7 +2,8 @@
 This is the primary endpoint to generate the g36 compatible magwell for the bren 805.
 
 * Namespace
-- Load all the namespaces we'll need for the project.
+This loads all the namespaces we'll need for the project.
+scad-clj is the only external library we're using.
 
 #+begin_src clojure :tangle core.clj
 (ns magwell.core
@@ -23,24 +24,25 @@ This is the primary endpoint to generate the g36 compatible magwell for the bren
 #+end_src
 
 * Model
-This creates the model to be saved as a magwell.scad file in -main.
+This creates the model to be saved as a magwell.scad file in -main. The following operations happen in order
 
-** 1.Base solid
+** Base solid
 *** Starts with main shell
-- [[file:shell.org][shell-with-slant-cut]] -  creates the bounding box and initial geometry of the magwell.
+[[file:shell.org][shell-with-slant-cut]] -  creates the bounding box and initial geometry of the magwell.
 
 *** Subtracts all internal cavities and interface cutouts that must exist inside the shell.
-- [[file:mag-inner.org][mag-inner-cutter]] – clears the internal volume for magazine
-- lever-pocket – creates space for the release/retention mechanism.
-- dovetail – subtracts the mating interface geometry.
-- mag-rim / mag-rim-mirrored / mag-rim-z – forms rim reliefs and alignment features.
+[[file:mag-inner.org][mag-inner-cutter]] – clears the internal volume for magazine
+[[file:lever_pocket.org][lever-pocket]] – creates space for the release/retention mechanism.
+dovetail – subtracts the mating interface geometry.
+mag-rim / mag-rim-mirrored / mag-rim-z – forms rim reliefs and alignment features.
 
-** 2.External additions
+** External additions
 Unions on the magazine ear geometry and reinforcing ridges.
 
-** 3.Final subtractions
+** Final subtractions
 Cuts away shelves, bores, and pinholes required for assembly, alignment, and actuation.
 
+** Code
 #+begin_src clojure :tangle core.clj
 (defn model
   []
