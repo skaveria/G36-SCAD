@@ -28,10 +28,14 @@ This creates the model to be saved as a magwell.scad file in -main. The followin
 
 ** 1.Base solid
 *** Starts with main shell
+**** shell-with-slant-cut
 [[file:shell.org][shell-with-slant-cut]] -  creates the bounding box and initial geometry of the magwell.
 
 *** Subtracts all internal cavities and interface cutouts that must exist inside the shell.
+**** mag-inner-cutter
 [[file:mag-inner.org][mag-inner-cutter]] – clears the internal volume for magazine
+
+**** lever-pocket
 [[file:lever_pocket.org][lever-pocket]] – creates space for the release/retention mechanism.
 dovetail – subtracts the mating interface geometry.
 mag-rim / mag-rim-mirrored / mag-rim-z – forms rim reliefs and alignment features.
