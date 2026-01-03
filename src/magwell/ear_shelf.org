@@ -1,0 +1,28 @@
+#+title: Ear Shelf
+
+#+begin_src clojure :tangle ear_shelf.clj
+(ns magwell.ear-shelf
+  (:require [scad-clj.model :as m]
+            [magwell.params :as p]))
+
+(defn ear-shelf
+  "Additive shelf. X/Y manual. Z can be either manual (:pos :z) or centered in shell Z
+  when :z-center? is true."
+  []
+  (let [{:keys [dims pos z-center?]} p/ear-shelf
+        {sx :x sy :y sz :z} dims
+        {px :x py :y pz :z} pos
+        shell-z (:z p/outer-dims)
+
+        z0 (if z-center?
+             (/ (- shell-z sz) 2.0)  ;; center in shell Z
+             pz)]
+    (m/translate [px py z0]
+      (m/cube sx sy sz :center false))))
+
+
+(defn ear-shelf-visual
+  []
+  (m/color [0 1 0 1]
+    (ear-shelf)))
+#+end_src

@@ -24,7 +24,7 @@ scad-clj is the only external library we're using.
 #+end_src
 
 * Model
-This creates the model to be saved as a magwell.scad file in -main. The following operations happen in order
+This creates the model to be saved as a `magwell.scad` file in -main. The following operations happen in order
 
 ** 1.Base subtraction
 
@@ -41,10 +41,26 @@ This creates the model to be saved as a magwell.scad file in -main. The followin
 [[file:mag_rim.org][mag-rim-final]] – forms rim reliefs and alignment features.
 
 ** 2.External additions
-Unions on the magazine ear geometry and reinforcing ridges.
+
+*** Add all extranal parts to the model
+
+[[file:mag_ear.org][mag-ear]] - This is the circular tab that has the will hold the pivot hole
+
+[[file:ear_ridges.org][ear-ridges]] - These are just some ridgs at the front of the magwell so it doesn't look so weird
 
 ** 3.Final subtractions
-Cuts away shelves, bores, and pinholes required for assembly, alignment, and actuation.
+
+*** Final subtractions on compound objects
+
+[[file:ear_shelf.org][ear-shelf]] - This is the cutout inside of the ear that allows for the lower to index on the upper.
+
+[[file:mag_ear.org][mag-ear-hole]] - This is the hole inside of the ear that holds the pin that keeps the upper and lower receivers together.
+
+[[file:x_bore.org][x-bore]] - This is a hole that's cut out of the top of the magwell to allow clearance for the barrel.
+
+[[file:pinhole.org][pinhole]] - This is the primary pinhole that connects the magwell to the rest of the lower.
+
+[[file:pinhole.org][pinhole-2]] - This is an additional pinhole to act as a pivot for the mag release lever.
 
 ** 4.Code
 #+begin_src clojure :tangle core.clj

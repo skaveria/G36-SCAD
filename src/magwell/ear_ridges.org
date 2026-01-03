@@ -1,0 +1,54 @@
+#+title: Ear Ridges
+
+#+begin_src clojure :tangle ear_ridges.clj
+(ns magwell.ear-ridge
+  (:require [scad-clj.model :as m]
+            [magwell.params :as p]))
+
+(defn trapezoid-profile
+  "2D trapezoid in X/Z, symmetric about X=0, resting on Z=0."
+  [{:keys [w-bottom w-top h]}]
+  (let [xb (/ w-bottom 2.0)
+        xt (/ w-top 2.0)]
+    (m/polygon
+     [[(- xb) 0]
+      [xb 0]
+      [xt h]
+      [(- xt) h]])))
+
+(defn ear-ridge-at
+  "Single trapezoid rib (additive) at an explicit position map {:x :y :z}."
+  [pos]
+  (let [{:keys [trap length rot]} p/ear-ridge
+        {:keys [x y z]} pos]
+    (m/translate [x y z]
+      (m/rotate rot
+        (m/extrude-linear {:height length}
+          (trapezoid-profile trap))))))
+
+(defn ear-ridge
+  "The base (single) ridge at p/ear-ridge :pos."
+  []
+  (ear-ridge-at (:pos p/ear-ridge)))
+
+(defn ear-ridges
+  "Array of ridges along +Z, starting from p/ear-ridge :pos, spaced by :spacing."
+  []
+  (let [{:keys [pos count spacing]} p/ear-ridge
+        {:keys [x y z]} pos]
+    (apply m/union
+           (for [i (range (max 1 (long count)))]
+             (ear-ridge-at {:x x
+                            :y y
+                            :z (+ z (* i spacing))})))))
+
+(defn ear-ridge-visual
+  []
+  (m/color [0.2 1 0.2 1]
+    (ear-ridge)))
+
+(defn ear-ridges-visual
+  []
+  (m/color [0.2 1 0.2 1]
+    (ear-ridges)))
+#+end_src
