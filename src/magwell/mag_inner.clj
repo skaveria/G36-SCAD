@@ -21,8 +21,3 @@
   (m/union
    (mag-inner-cube)
    (mag-side-channel-cube)))
-
-(defn mag-inner-visual
-  []
-  (m/color [1 0 0 1]
-    (mag-inner-cutter)))

@@ -7,29 +7,41 @@
             [magwell.params :as p]))
 #+end_src
 
-
-#+begin_src clojure
-
+* mag-inner-cube
+This is the basic boolean that goes through the magwell.
+#+begin_src clojure :tangle mag_inner.clj
 (defn mag-inner-cube
   []
   (let [{:keys [x y z]} p/mag-inner-dims
         {px :x py :y pz :z} p/mag-inner-pos]
     (m/translate [px py pz]
       (m/cube x y z :center false))))
+#+end_src
 
+* mag-side-channel-cube
+This is the negative space for the tab that runs along the back of the magazine.
+#+begin_src clojure :tangle mag_inner.clj
 (defn mag-side-channel-cube
   []
   (let [{:keys [x y z]} p/mag-side-channel-dims
         {px :x py :y pz :z} p/mag-side-channel-pos]
     (m/translate [px py pz]
       (m/cube x y z :center false))))
+#+end_src
 
+* mag-inner-cutter
+This is the union of the basic inner cube and the side channel to create a compound cutter to be used in the core boolean operation.
+#+begin_src clojure :tangle mag_inner.clj
 (defn mag-inner-cutter
   []
   (m/union
    (mag-inner-cube)
    (mag-side-channel-cube)))
+#+end_src
 
+* mag-inner-visual
+This is a visual version of the mag-inner-cutter, good for debugging.
+#+begin_src clojure
 (defn mag-inner-visual
   []
   (m/color [1 0 0 1]
